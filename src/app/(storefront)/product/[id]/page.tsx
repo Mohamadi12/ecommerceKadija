@@ -2,9 +2,8 @@ import { addItem } from "@/actions/addItem";
 import { FeaturedProducts } from "@/components/global/storefront/FeaturedProducts";
 import { ImageSlider } from "@/components/global/storefront/ImageSlider";
 import { ShoppingBagButton } from "@/components/global/submit-button/SubmitButton";
-import { Button } from "@/components/ui/button";
 import { client } from "@/lib/prisma";
-import { ShoppingBag, StarIcon } from "lucide-react";
+import { StarIcon } from "lucide-react";
 import { notFound } from "next/navigation";
 
 export async function getData(productId: string) {
