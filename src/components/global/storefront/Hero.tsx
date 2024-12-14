@@ -27,8 +27,8 @@ export async function Hero() {
           <CarouselItem key={item.id}>
             <div className="relative h-[60vh] lg:h-[80vh]">
               <Image
-                src={item.imageString}
                 alt="Banner Image"
+                src={item.imageString}
                 fill
                 className="object-cover w-full h-full rounded-xl"
               />
@@ -39,8 +39,8 @@ export async function Hero() {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="ml-16"/>
-      <CarouselNext className="mr-16"/>
+      <CarouselPrevious className="ml-16" />
+      <CarouselNext className="mr-16" />
     </Carousel>
   );
 }
