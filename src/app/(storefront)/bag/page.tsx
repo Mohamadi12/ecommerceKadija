@@ -1,5 +1,6 @@
 import { delItem } from "@/actions/deleteItem";
-import { DeleteItem } from "@/components/global/submit-button/SubmitButton";
+import { checkOut } from "@/actions/payment";
+import { CheckoutButton, DeleteItem } from "@/components/global/submit-button/SubmitButton";
 import { Button } from "@/components/ui/button";
 import { Cart } from "@/lib/interface";
 import { redis } from "@/lib/redis";
@@ -75,9 +76,9 @@ export default async function BagRoute() {
               <p>Subtotal:</p>
               <p>${new Intl.NumberFormat("en-US").format(totalPrice)}</p>
             </div>
-            <Button size="lg" className="w-full mt-5">
-              Checkout
-            </Button>
+            <form action={checkOut}>
+              <CheckoutButton buttonText="Checkout"/>
+            </form>
           </div>
         </div>
       )}

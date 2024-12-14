@@ -68,3 +68,26 @@ export function DeleteItem({ text = "Delete" }) {
     </button>
   );
 }
+
+
+export function CheckoutButton({
+  buttonText = "Checkout",
+}) {
+  const { pending } = useFormStatus();
+  return (
+    <Button
+      type="submit"
+      disabled={pending}
+      className="w-full mt-5"
+    >
+      {pending ? (
+        <>
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          Please Wait...
+        </>
+      ) : (
+        buttonText
+      )}
+    </Button>
+  );
+}
