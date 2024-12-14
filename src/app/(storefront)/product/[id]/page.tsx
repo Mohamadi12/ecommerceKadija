@@ -1,5 +1,7 @@
+import { addItem } from "@/actions/addItem";
 import { FeaturedProducts } from "@/components/global/storefront/FeaturedProducts";
 import { ImageSlider } from "@/components/global/storefront/ImageSlider";
+import { ShoppingBagButton } from "@/components/global/submit-button/SubmitButton";
 import { Button } from "@/components/ui/button";
 import { client } from "@/lib/prisma";
 import { ShoppingBag, StarIcon } from "lucide-react";
@@ -28,6 +30,9 @@ export async function getData(productId: string) {
 const ProductIdRoute = async ({ params }: { params: { id: string } }) => {
   const { id } = await params;
   const data = await getData(id);
+
+  const addProductToShoppingCart = addItem.bind(null, data.id);
+
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start lg:gap-x-24 py-6">
@@ -45,9 +50,9 @@ const ProductIdRoute = async ({ params }: { params: { id: string } }) => {
             <StarIcon className="h-4 w-4 text-yellow-500 fill-yellow-500" />
           </div>
           <p className="text-base text-gray-700 mt-6">{data.description}</p>
-          <Button size="lg" className="w-full mt-5">
-            <ShoppingBag className="mr-4 h-5 w-5" /> Add to Cart
-          </Button>
+          <form action={addProductToShoppingCart}>
+            <ShoppingBagButton />
+          </form>
         </div>
       </div>
       <div className="mt-16">

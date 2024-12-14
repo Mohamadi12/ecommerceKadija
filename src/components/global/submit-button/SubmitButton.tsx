@@ -1,11 +1,14 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
+import { Loader2, ShoppingBag } from "lucide-react";
 import React from "react";
 import { useFormStatus } from "react-dom";
 
-const SubmitButton = ({ buttonText = "Create Product", className = "" }) => {
+export function SubmitButton({
+  buttonText = "Create Product",
+  className = "",
+}) {
   const { pending } = useFormStatus();
   return (
     <Button
@@ -23,6 +26,24 @@ const SubmitButton = ({ buttonText = "Create Product", className = "" }) => {
       )}
     </Button>
   );
-};
+}
 
-export default SubmitButton;
+export function ShoppingBagButton() {
+  const { pending } = useFormStatus();
+
+  return (
+    <Button type="submit" disabled={pending} size="lg" className="w-full mt-5">
+      {pending ? (
+        <>
+          <Loader2 className="mr-4 h-5 w-5 animate-spin" />
+          Please Wait
+        </>
+      ) : (
+        <>
+          <ShoppingBag className="mr-4 h-5 w-5" />
+          Add to Cart
+        </>
+      )}
+    </Button>
+  );
+}

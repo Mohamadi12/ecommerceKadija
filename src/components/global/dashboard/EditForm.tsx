@@ -23,7 +23,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { ChevronLeft, XIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import SubmitButton from "../submit-button/SubmitButton";
 import { UploadDropzone } from "@/lib/uploadthing";
 import { categories } from "@/lib/categories";
 import { useActionState, useState } from "react";
@@ -32,6 +31,7 @@ import { parseWithZod } from "@conform-to/zod";
 import { productSchema } from "@/lib/zodSchema";
 import { $Enums } from "@prisma/client";
 import { editProduct } from "@/actions/editProduct";
+import { SubmitButton } from "../submit-button/SubmitButton";
 
 interface iAppProps {
   data: {

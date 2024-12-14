@@ -30,7 +30,7 @@ import { productSchema } from "@/lib/zodSchema";
 import { createProduct } from "@/actions/createProduct";
 import Image from "next/image";
 import { categories } from "@/lib/categories";
-import SubmitButton from "@/components/global/submit-button/SubmitButton";
+import { SubmitButton } from "@/components/global/submit-button/SubmitButton";
 
 const ProductCreateRoute = () => {
   const [images, setImages] = useState<string[]>([]);

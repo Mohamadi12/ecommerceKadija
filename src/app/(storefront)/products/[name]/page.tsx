@@ -2,10 +2,10 @@ import { ProductCard } from "@/components/global/storefront/ProductCard";
 import { client } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 
-export async function getData(productCategory: string) {
+async function getData(productCategory: string) {
   switch (productCategory) {
     case "all": {
-      const data = await prisma?.product.findMany({
+      const data = await client.product.findMany({
         select: {
           name: true,
           images: true,
@@ -17,12 +17,12 @@ export async function getData(productCategory: string) {
           status: "published",
         },
       });
+
       return {
-        title: "All products",
+        title: "All Products",
         data: data,
       };
     }
-
     case "men": {
       const data = await client.product.findMany({
         where: {
@@ -37,12 +37,12 @@ export async function getData(productCategory: string) {
           description: true,
         },
       });
+
       return {
-        title: "Products for men",
+        title: "Products for Men",
         data: data,
       };
     }
-
     case "women": {
       const data = await client.product.findMany({
         where: {
@@ -57,8 +57,9 @@ export async function getData(productCategory: string) {
           description: true,
         },
       });
+
       return {
-        title: "Products for women",
+        title: "Products to Women",
         data: data,
       };
     }
@@ -76,8 +77,9 @@ export async function getData(productCategory: string) {
           description: true,
         },
       });
+
       return {
-        title: "Products for kids",
+        title: "Products for Kids",
         data: data,
       };
     }
@@ -95,7 +97,7 @@ const CategoriesPage = async ({ params }: { params: { name: string } }) => {
       <h1 className="font-semibold text-3xl my-5">{title}</h1>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
         {data?.map((item) => (
-          <ProductCard item={item} />
+          <ProductCard item={item} key={item.id} />
         ))}
       </div>
     </section>
