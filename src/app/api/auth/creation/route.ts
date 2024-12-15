@@ -19,7 +19,7 @@ export async function GET(){
         dbUser = await client.user.create({
             data: {
                 id: user.id,
-                firstaName: user.given_name ?? "",
+                firstName: user.given_name ?? "",
                 lastName: user.family_name ?? "",
                 email: user.email ?? "",
                 profileImage: user.picture ?? `https://avatar.versel.sh/rauchg${user.given_name}`

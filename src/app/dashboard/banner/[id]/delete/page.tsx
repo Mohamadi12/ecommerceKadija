@@ -1,5 +1,5 @@
 import { deleteBanner } from '@/actions/deleteBanner'
-import SubmitButton from '@/components/global/submit-button/SubmitButton'
+import { SubmitButton } from '@/components/global/submit-button/SubmitButton'
 import { Button } from '@/components/ui/button'
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import Link from 'next/link'

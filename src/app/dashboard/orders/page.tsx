@@ -13,9 +13,39 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { client } from "@/lib/prisma";
 import React from "react";
 
-const OrderPage = () => {
+async function getData() {
+  const data = await client.order.findMany({
+    select: {
+      amount: true,
+      createdAt: true,
+      status: true,
+      id: true,
+      User: {
+        select: {
+          firstName : true,
+          lastName: true,
+          id: true,
+          email: true,
+          profileImage: true,
+        },
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return data;
+}
+
+
+
+const OrderPage = async () => {
+  const data = await getData()
+
   return (
     <Card>
       <CardHeader className="px-7">
@@ -32,18 +62,24 @@ const OrderPage = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              <TableRow>
+            {data.map((item) => (
+              <TableRow key={item.id}>
                 <TableCell>
-                  <p className="font-medium">Khadija Triki</p>
+                  <p className="font-medium">{item.User?.firstName}</p>
                   <p className="hidden md:flex text-sm text-muted-foreground">
-                    test@gmail.com
+                    {item.User?.email}
                   </p>
                 </TableCell>
-                <TableCell>Sale</TableCell>
-                <TableCell>Successfull</TableCell>
-                <TableCell>2024-12-11</TableCell>
-                <TableCell className="text-right">$250.00</TableCell>
+                <TableCell>Order</TableCell>
+                <TableCell>{item.status}</TableCell>
+                <TableCell>
+                  {new Intl.DateTimeFormat("en-US").format(item.createdAt)}
+                </TableCell>
+                <TableCell className="text-right">
+                  ${new Intl.NumberFormat("en-US").format(item.amount / 100)}
+                </TableCell>
               </TableRow>
+            ))}
             </TableBody>
           </Table>
         </CardContent>

@@ -1,7 +1,7 @@
 "use client";
 
 import { createBanner } from "@/actions/createBanner";
-import SubmitButton from "@/components/global/submit-button/SubmitButton";
+import { SubmitButton } from "@/components/global/submit-button/SubmitButton";
 import { Button } from "@/components/ui/button";
 import {
   Card,
